@@ -15,10 +15,6 @@ To implement:
 * `git remote add codecommit codecommit::<REGION>://Gitflow-Workshop`
 * `git push codecommit`
 
-Be sure to:
-
-* Change the title in this README
-* Edit your repository description on GitHub
 
 ## Security
 
