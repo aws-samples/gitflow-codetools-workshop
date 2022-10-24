@@ -1,6 +1,19 @@
-## My Project
+## How to leverage AWS CodeSuite tools in a Multi-Branch Model
 
-TODO: Fill this README out!
+This will
+
+* create repo
+* create codebuild pipeline creator
+* on branch creation (including main) create the pipelines
+* on branch delete - destroy the pipelines
+
+To implement:
+* `git clone https://github.com/aws-samples/gitflow-codetools-workshop.git`
+* `cdk deploy gitflow-repo-stack`
+* `cdk deploy branch-create-codebuild`
+* `pip install git-remote-codecommit`
+* `git remote add codecommit codecommit::<REGION>://Gitflow-Workshop`
+* `git push codecommit`
 
 Be sure to:
 
