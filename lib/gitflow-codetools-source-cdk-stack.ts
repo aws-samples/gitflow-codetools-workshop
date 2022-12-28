@@ -22,7 +22,7 @@ export class GitflowCodetoolsSourceCdkStack extends cdk.Stack {
     });
 
     //add method to API gateway to GET basic app with path /prod/app
-    const appPath = appApi.root.addResource('app');
+    const appPath = appApi.root;
     appPath.addMethod(
       'GET',
       new api.LambdaIntegration(appLambda, {proxy: true}),
