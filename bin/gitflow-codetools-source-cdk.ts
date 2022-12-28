@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { GitflowCodetoolsSourceCdkStack } from '../lib/gitflow-codetools-source-cdk-stack';
 import { RepoCdkStack } from '../lib/repo-cdk-stack'
@@ -15,8 +14,7 @@ new RepoCdkStack(app, 'gitflow-repo-stack', {repositoryName: repositoryName});
 new BranchCreateCdkStack(app, 'branch-create-codebuild', {repositoryName: repositoryName});
 new PipelineCdkStack(app, repositoryName + branch_name, {repositoryName: repositoryName, branchName: branch_name});
 
-
-new GitflowCodetoolsSourceCdkStack(app, 'GitflowCodetoolsSourceCdkStack', {
+new GitflowCodetoolsSourceCdkStack(app, repositoryName + branch_name + 'App', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */

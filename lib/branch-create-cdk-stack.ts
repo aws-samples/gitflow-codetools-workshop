@@ -97,6 +97,7 @@ export class BranchCreateCdkStack extends Stack {
                         echo "=============================================================="
                         echo "WARNING: Destroying stack (\${STACK_NAME})"
                         echo "=============================================================="
+                        npx cdk destroy -e --force \${STACK_NAME}App
                         npx cdk destroy -e --force \${STACK_NAME}
                         ;;
                     esac
