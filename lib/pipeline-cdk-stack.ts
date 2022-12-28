@@ -66,7 +66,7 @@ export class PipelineCdkStack extends Stack {
             - '**/*'
         exclude-paths:
             - './node_modules/**/*'
-`);
+    `);
 
     const codeDeployBuild = new codebuild.PipelineProject(
       this,
@@ -115,7 +115,7 @@ export class PipelineCdkStack extends Stack {
       ],
     });
 
-    // allow pipeline to manage cloudformation stacks
+    // allow code deploy stage to manage cloudformation stacks
     const cfnDeployPolicy = new PolicyStatement({
       effect: Effect.ALLOW,
       actions: [
@@ -129,9 +129,9 @@ export class PipelineCdkStack extends Stack {
       ],
       resources: ['arn:aws:cloudformation:*:*:stack/' + props.repositoryName + '*/*'],
     });
-    pipeline.addToRolePolicy(cfnDeployPolicy);
+    codeDeployBuild.addToRolePolicy(cfnDeployPolicy);
 
-    // allow pipeline to assume cdk roles
+    // allow code deploy stage to assume cdk roles
     const cdkToolkitPolicy = new PolicyStatement({
         effect: Effect.ALLOW,
         actions: [
@@ -139,9 +139,9 @@ export class PipelineCdkStack extends Stack {
         ],
         resources: ['arn:aws:iam::*:role/cdk-*'],
     });
-    pipeline.addToRolePolicy(cdkToolkitPolicy);
+    codeDeployBuild.addToRolePolicy(cdkToolkitPolicy);
 
-    // allow pipeline to use cdk staging bucket
+    // allow code deploy stage to use cdk staging bucket
     const cdkStagingBucketPolicy = new PolicyStatement({
         effect: Effect.ALLOW,
         actions: [
@@ -151,7 +151,7 @@ export class PipelineCdkStack extends Stack {
         ],
         resources: ['arn:aws:s3:::cdktoolkit-stagingbucket-*'],
     });
-    pipeline.addToRolePolicy(cdkStagingBucketPolicy);
+    codeDeployBuild.addToRolePolicy(cdkStagingBucketPolicy);
 
   }
 }
