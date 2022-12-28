@@ -31,7 +31,7 @@ export class PipelineCdkStack extends Stack {
     phases:
         install:
             runtime-versions:
-                nodejs: 16
+                nodejs: 14
 
         pre_build:
             commands:
