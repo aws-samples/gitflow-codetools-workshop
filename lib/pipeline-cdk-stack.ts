@@ -113,5 +113,43 @@ export class PipelineCdkStack extends Stack {
       ],
     });
 
+    // allow pipeline to manage cloudformation stacks
+    const cfnDeployPolicy = new PolicyStatement({
+      effect: Effect.ALLOW,
+      actions: [
+          'cloudformation:DescribeStack*',
+          'cloudformation:CreateChangeSet',
+          'cloudformation:DescribeChangeSet',
+          'cloudformation:ExecuteChangeSet',
+          'cloudformation:DescribeStackEvents',
+          'cloudformation:DeleteChangeSet',
+          'cloudformation:GetTemplate',
+      ],
+      resources: ['arn:aws:cloudformation:*:*:stack/' + props.repositoryName + '*/*'],
+    });
+    pipeline.addToRolePolicy(cfnDeployPolicy);
+
+    // allow pipeline to assume cdk roles
+    const cdkToolkitPolicy = new PolicyStatement({
+        effect: Effect.ALLOW,
+        actions: [
+            'sts:AssumeRole',
+        ],
+        resources: ['arn:aws:iam::*:role/cdk-*'],
+    });
+    pipeline.addToRolePolicy(cdkToolkitPolicy);
+
+    // allow pipeline to use cdk staging bucket
+    const cdkStagingBucketPolicy = new PolicyStatement({
+        effect: Effect.ALLOW,
+        actions: [
+            's3:*Object',
+            's3:ListBucket',
+            's3:GetBucketLocation',
+        ],
+        resources: ['arn:aws:s3:::cdktoolkit-stagingbucket-*'],
+    });
+    pipeline.addToRolePolicy(cdkStagingBucketPolicy);
+
   }
 }
