@@ -45,11 +45,11 @@ export class PipelineCdkStack extends Stack {
         build:
             commands:
             - |-
-                echo "INFO: Configuring build parameters ..."
+                echo "INFO: Configuring App build parameters ..."
                 set -eu
-                export STACK_NAME="\${TEMPLATE_STACK_PREFIX}\${TEMPLATE_REFERENCE_NAME}"
+                export STACK_NAME="\${TEMPLATE_STACK_PREFIX}\${TEMPLATE_REFERENCE_NAME}App"
             - |-
-                echo "INFO: Synthesizing CDK resources ..."
+                echo "INFO: Synthesizing CDK App resources ..."
                 set -eu
                 npm run build
                 npx cdk ls
@@ -57,7 +57,7 @@ export class PipelineCdkStack extends Stack {
             - |-
                 echo "INFO: Deploying Application ..."
                     npx cdk diff -e \${STACK_NAME}
-                    npx cdk deploy -e --require-approval=never \${STACK_NAME}App
+                    npx cdk deploy -e --require-approval=never \${STACK_NAME}
 
     artifacts:
         files:
