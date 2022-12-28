@@ -70,6 +70,7 @@ export class PipelineCdkStack extends Stack {
       this,
       "Code Deploy",
       {
+        buildSpec: codebuild.BuildSpec.fromObjectToYaml(yamlBuildspec),
         environment: {
           buildImage: codebuild.LinuxBuildImage.STANDARD_5_0,
           privileged: true,
