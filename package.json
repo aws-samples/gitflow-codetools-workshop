@@ -24,6 +24,6 @@
     "aws-cdk-lib": "2.33.0",
     "constructs": "^10.0.0",
     "source-map-support": "^0.5.21",
-    "yaml": "^2.1.1"
+    "yaml": "^2.2.2"
   }
 }
