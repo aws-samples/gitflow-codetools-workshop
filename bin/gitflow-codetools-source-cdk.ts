@@ -3,7 +3,7 @@ import * as cdk from 'aws-cdk-lib';
 import { GitflowCodetoolsSourceCdkStack } from '../lib/gitflow-codetools-source-cdk-stack';
 import { RepoCdkStack } from '../lib/repo-cdk-stack'
 import { PipelineCdkStack } from '../lib/pipeline-cdk-stack'
-import { BranchCreateCdkStack } from '../lib/branch-create-cdk-stack';
+import { BranchCreateCdkStack } from '../examples/branch-create-cdk-stack';
 
 const app = new cdk.App();
 
